@@ -1,0 +1,82 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Bebas Neue", cursive;
+  line-height: 1.6; }
+
+img {
+  max-width: 100%;
+  display: block; }
+
+h1,
+h2,
+h3,
+p {
+  margin: 0; }
+
+.container {
+  width: 85%;
+  margin: 0 auto;
+  max-width: 65em; }
+
+.hero {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-image: linear-gradient(to top, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)), url(./assets/images/face.svg);
+  background-size: cover;
+  background-position: center; }
+  .hero .main__title {
+    font-size: 50px;
+    font-weight: 200;
+    line-height: 42px; }
+  .hero p {
+    font-size: 2em; }
+
+main {
+  padding: 100px 0; }
+  main .project {
+    padding: 100px 0; }
+    main .project .image-container {
+      overflow: hidden;
+      position: relative; }
+      main .project .image-container::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.2); }
+      main .project .image-container .position {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%; }
+        main .project .image-container .position.center {
+          left: 50%; }
+        main .project .image-container .position.left {
+          left: 25%; }
+        main .project .image-container .position.right {
+          left: 75%; }
+      main .project .image-container .project__title {
+        font-size: 72px;
+        z-index: 2;
+        letter-spacing: 3px;
+        color: white; }
+      main .project .image-container .project__number {
+        font-size: 200px;
+        z-index: 2;
+        color: rgba(255, 255, 255, 0.2); }
+
+.gs_reveal {
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0s; }
+
+/*# sourceMappingURL=style.css.map */
