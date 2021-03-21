@@ -54,9 +54,14 @@ p {
 
 main {
   padding: 100px 0;
+  transition: .5s ease-in-out;
   .project {
     padding: 100px 0;
-    .image-container {
+    transition: .5s ease-in-out;
+    .container {
+      transition: .5s ease-in-out;
+    }
+    .project__cover {
       overflow: hidden;
       position: relative;
       &::after {
@@ -94,11 +99,39 @@ main {
         color: $whiteImageOverlayColor;
       }
     }
+    .project__content {
+      display: none;
+    }
+    // &.main-project {
+    //   // padding-top: 0;
+    //   // .project__content {
+    //   //   display: block;
+    //   //   padding: 50px 0;
+    //   // }
+    //   & > .container {
+    //     width: 100%;
+    //   }
+    // }
   }
+  // &.main-project {
+  //   padding: 0;
+  // }
 }
 
 .gs_reveal {
-    opacity: 0;
-    visibility: hidden;
-    transition: transform 0s;
-  }
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0s;
+}
+
+.hide {
+  display: none;
+}
+
+// .main-project {
+//   position: fixed;
+//   .container {
+//     // transition: .25s ease;
+//     // width: 100%;
+//   }
+// }
