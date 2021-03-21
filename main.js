@@ -59,23 +59,27 @@ const main = document.querySelector("main");
 projects.forEach((project, i) => {
   const cover = project.querySelector(".project__cover");
   const content = project.querySelector(".project__content");
-  const container = project.querySelector(".container");
+  const imagesContainer = content.querySelector(".container");
+  const projectContainer = project.querySelector(".container");
+
 
 
 
   cover.addEventListener("click", () => {
     project.classList.add("main-project");
-    // main.classList.add("main-project");
+    cover.querySelectorAll('.gs_reveal').forEach(el => el.classList.remove('gs_reveal'))
     const everythingExceptProject = document.querySelectorAll(`.hero, main > *:not(.main-project)`);
-    console.log(everythingExceptProject)
 
     const styleData = project.getBoundingClientRect();
     // mainProjectContainer.style.top = styleData.top + 100;
     gsap.to(everythingExceptProject, { opacity: 0, duration: .1, ease: 'ease'})
-    gsap.to(container, {width: '100%', ease: 'ease', duration: .25})
+    gsap.to(projectContainer, {width: '100%', ease: 'ease', duration: .25})
     gsap.to(project, {top: `${styleData.top}px`, duration: 0, delay: .5, position: 'fixed'})
+    gsap.to(content, {duration: 0, delay: .5, display: 'block'})
     gsap.to(everythingExceptProject, { delay: .5, duration: 0, display: 'none'})
-    gsap.to(project, {top: 0, duration: .25, delay: .75, paddingTop: 0, ease: 'elastic'})
+    gsap.to(project, {top: 0, bottom: 0, duration: .25, delay: .75, paddingTop: 0, ease: 'elastic'})
+    gsap.to(content, { opacity: 1, duration: .25, delay: 1.75, ease: 'ease'})
+    // gsap.to(imagesContainer, { opacity: 1, duration: .25, delay: 1.75, ease: 'ease'})
     
 
     // let top = project.getBoundingClientRect().top + 

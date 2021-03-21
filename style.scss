@@ -101,17 +101,17 @@ main {
     }
     .project__content {
       display: none;
+      opacity: 0;
+      padding-top: 100px;
+      .image-container {
+        padding: 100px 0;
+      }
     }
-    // &.main-project {
-    //   // padding-top: 0;
-    //   // .project__content {
-    //   //   display: block;
-    //   //   padding: 50px 0;
-    //   // }
-    //   & > .container {
-    //     width: 100%;
-    //   }
-    // }
+    &.main-project {
+      overflow-y: scroll;
+      // top: 0;
+      // bottom: 0;
+    }
   }
   // &.main-project {
   //   padding: 0;

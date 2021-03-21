@@ -78,7 +78,13 @@ main {
         z-index: 2;
         color: rgba(255, 255, 255, 0.2); }
     main .project .project__content {
-      display: none; }
+      display: none;
+      opacity: 0;
+      padding-top: 100px; }
+      main .project .project__content .image-container {
+        padding: 100px 0; }
+    main .project.main-project {
+      overflow-y: scroll; }
 
 .gs_reveal {
   opacity: 0;
