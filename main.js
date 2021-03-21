@@ -59,7 +59,7 @@ const main = document.querySelector("main");
 projects.forEach((project, i) => {
   const cover = project.querySelector(".project__cover");
   const content = project.querySelector(".project__content");
-  const imagesContainer = content.querySelector(".container");
+  const gsRevealElements = cover.querySelectorAll('.gs_reveal')
   const projectContainer = project.querySelector(".container");
 
 
@@ -67,7 +67,11 @@ projects.forEach((project, i) => {
 
   cover.addEventListener("click", () => {
     project.classList.add("main-project");
-    cover.querySelectorAll('.gs_reveal').forEach(el => el.classList.remove('gs_reveal'))
+    gsRevealElements.forEach(el => {
+      el.classList.remove('gs_reveal')
+      el.classList.remove('gs_reveal_fromLeft')
+      el.classList.remove('gs_reveal_fromRight')
+    })
     const everythingExceptProject = document.querySelectorAll(`.hero, main > *:not(.main-project)`);
 
     const styleData = project.getBoundingClientRect();
