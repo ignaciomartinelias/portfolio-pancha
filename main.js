@@ -2,7 +2,7 @@ function animateFrom(elem, direction) {
   direction = direction | 1;
 
   var x = 0,
-    y = direction * 100;
+    y = direction * 200;
   const hasFromLeft = elem.classList.contains("gs_reveal_fromLeft");
   const hasFromRight = elem.classList.contains("gs_reveal_fromRight");
   const isMainProject = elem.classList.contains("main-project");
@@ -53,11 +53,7 @@ gsap.utils.toArray(".gs_reveal").forEach(function (elem) {
   });
 });
 
-const projects = document.querySelectorAll(".project");
-const main = document.querySelector("main");
-// const mainProjectContainer = document.querySelector(".main-project");
-
-projects.forEach(project => {
+document.querySelectorAll(".project").forEach(project => {
   const projectContainer = project.querySelector(".container");
   const cover = project.querySelector(".project__cover");
   const movingElements = cover.querySelectorAll(".gs_reveal");
@@ -79,10 +75,9 @@ projects.forEach(project => {
           project.classList.remove("main-project");
         },
         onComplete: () => {
-          console.log('complete')
           gsap.utils.toArray(images).forEach(function (elem) {
             hide(elem); // assure that the element is hidden when scrolled into view
-    
+
             ScrollTrigger.create({
               trigger: elem,
               scroller: project,
@@ -97,13 +92,12 @@ projects.forEach(project => {
               }, // assure that the element <i></i>s hidden when scrolled into view
             });
           });
-        }
+        },
       });
       tl.to(everythingExceptProject, { opacity: 0, duration: 0.25, ease: "ease" });
       tl.to(projectContainer, { width: "100%", ease: "ease", duration: 0.25 });
       tl.to(project, { top: `${styleData.top}px`, duration: 0, position: "fixed" });
       tl.to(content, { duration: 0, display: "block" });
-      // tl.to(everythingExceptProject, { duration: 0, display: "none" });
       tl.to(project, { delay: 0.25, top: 0, bottom: 0, duration: 0.25, paddingTop: 0, ease: "elastic" });
       tl.to(content, { opacity: 1, duration: 0.25, ease: "ease" });
       tl.to(backButton, { display: "block", opacity: 1, duration: 0.25, ease: "ease" });
