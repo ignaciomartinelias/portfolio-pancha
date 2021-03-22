@@ -8,6 +8,7 @@ function addGSAPTransitions() {
       y = direction * 100;
     const hasFromLeft = elem.classList.contains("gs_reveal_fromLeft");
     const hasFromRight = elem.classList.contains("gs_reveal_fromRight");
+    const isMainProject = elem.classList.contains("main-project");
     if (hasFromLeft) {
       x = -100;
       y = 0;
@@ -15,19 +16,21 @@ function addGSAPTransitions() {
       x = 100;
       y = 0;
     }
-    gsap.fromTo(
-      elem,
-      { x: x, y: y, autoAlpha: 0 },
-      {
-        duration: hasFromLeft || hasFromRight ? 2 : 1.25,
-        x: 0,
-        y: 0,
-        autoAlpha: 1,
-        ease: "expo",
-        overwrite: "auto",
-        delay: hasFromLeft || hasFromRight ? 0.5 : 0,
-      }
-    );
+    if(!isMainProject) {
+      gsap.fromTo(
+        elem,
+        { x: x, y: y, autoAlpha: 0 },
+        {
+          duration: hasFromLeft || hasFromRight ? 2 : 1.25,
+          x: 0,
+          y: 0,
+          autoAlpha: 1,
+          ease: "expo",
+          overwrite: "auto",
+          delay: hasFromLeft || hasFromRight ? 0.5 : 0,
+        }
+      );
+    }
   }
 
   function hide(elem) {
@@ -58,63 +61,42 @@ const projects = document.querySelectorAll(".project");
 const main = document.querySelector("main");
 // const mainProjectContainer = document.querySelector(".main-project");
 
-projects.forEach((project, i) => {
-  const cover = project.querySelector(".project__cover");
-  const content = project.querySelector(".project__content");
+projects.forEach(project => {
   const projectContainer = project.querySelector(".container");
+  const cover = project.querySelector(".project__cover");
+  const movingElements = cover.querySelectorAll(".gs_reveal");
+  const content = project.querySelector(".project__content");
+  const backButton = cover.querySelector(".back");
 
   cover.addEventListener("click", () => {
-    project.classList.add("main-project");
-    ScrollTrigger.kill()
-    const everythingExceptProject = document.querySelectorAll(`.hero, main > *:not(.main-project)`);
+    if (!project.classList.contains("main-project")) {
+      document.body.classList.add("main-project");
+      project.classList.add("main-project");
+      movingElements.forEach(el => el.classList.add('main-project'))
+      const everythingExceptProject = document.querySelectorAll(`.hero, main > *:not(.main-project)`);
 
-    const styleData = project.getBoundingClientRect();
-    // mainProjectContainer.style.top = styleData.top + 100;
-    const tl = gsap.timeline();
-    tl.to(everythingExceptProject, { opacity: 0, duration: 0.25, ease: "ease" });
-    tl.to(projectContainer, { width: "100%", ease: "ease", duration: 0.25 });
-    tl.to(project, { top: `${styleData.top}px`, duration: 0, position: "fixed" });
-    tl.to(content, { duration: 0, display: "block" });
-    tl.to(everythingExceptProject, { duration: 0, display: "none" });
-    tl.to(project, { delay: 0.5, top: 0, bottom: 0, duration: 0.25, paddingTop: 0, ease: "elastic" });
-    tl.to(content, { opacity: 1, duration: 0.25, ease: "ease" });
-    // gsap.to(imagesContainer, { opacity: 1, duration: .25, delay: 1.75, ease: 'ease'})
+      const styleData = project.getBoundingClientRect();
+      // mainProjectContainer.style.top = styleData.top + 100;
+      const tl = gsap.timeline({
+        onReverseComplete: () => {
+          document.body.classList.remove("main-project");
+          project.classList.remove("main-project");
+        },
+      });
+      tl.to(everythingExceptProject, { opacity: 0, duration: 0.25, ease: "ease" });
+      tl.to(projectContainer, { width: "100%", ease: "ease", duration: 0.25 });
+      tl.to(project, { top: `${styleData.top}px`, duration: 0, position: "fixed" });
+      tl.to(content, { duration: 0, display: "block" });
+      // tl.to(everythingExceptProject, { duration: 0, display: "none" });
+      tl.to(project, { delay: 0.25, top: 0, bottom: 0, duration: 0.25, paddingTop: 0, ease: "elastic" });
+      tl.to(content, { opacity: 1, duration: 0.25, ease: "ease" });
+      tl.to(backButton, { display: "block", opacity: 1, duration: 0.25, ease: "ease" });
 
-    // let top = project.getBoundingClientRect().top +
-    //       project.ownerDocument.defaultView.pageYOffset
-    // console.log(top)
-    // console.log(styleData);
-
-    // console.log(everythingExceptProject);
-
-    // var tl = gsap.timeline();
-    // tl.to(project, {position: 'fixed', top: styleData.top + 'px'})
-
-    // ,{position: 'fixed', top: 0, ease: 'ease', duration: 1, delay: .25, paddingTop: 0}
-    // tl.to(project ,{position: 'fixed', top: 0, ease: 'ease', duration: 1, delay: .25})
-    // tl.to(everythingExceptProject, {opacity: 0, duration: .25, ease: 'ease'})
-
-    // everythingExceptProject.forEach(el => el.classList.add('hide'))
-    // gsap.to(everythingExceptProject, { opacity: 0, duration: .25, display: "none", height: 0, ease: "ease" });
-    // gsap.to(project, { position: "fixed", top: 0, left: 0, duration: 1, ease: "ease" });
-
-    // gsap.to(main, {padding: 0, duration: 1, ease: 'ease'})
-    // gsap.to(p, {paddingTop: 0, duration: 1, ease: 'ease'})
-    // gsap.to(content, {display: 'block', opacity: 1, padding: '50px 0', duration: 1, ease: 'ease'})
-    // gsap.to(projectContainer, {width: '100%', duration: 1, ease: 'ease'})
-
-    // padding-top: 0;
-    // .project__content {
-    //   display: block;
-    //   padding: 50px 0;
-    // }
-    // & > .container {
-    //   width: 100%;
-    // }
-    // gsap.to(everythingExceptProject, {height: 0, duration: 1, ease: 'ease'})
-    // gsap.fromTo(cover, {position: 'static', left: 0}, {position: 'absolute', left: 0, duration: 1, ease: 'ease'});
+      backButton.addEventListener("click", () => {
+        tl.reverse();
+      });
+    }
   });
 });
-
 
 addGSAPTransitions();

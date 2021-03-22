@@ -11,6 +11,9 @@ body {
   margin: 0;
   font-family: "Bebas Neue", cursive;
   line-height: 1.6;
+  &.main-project {
+    overflow: hidden;
+  }
 }
 
 img {
@@ -98,6 +101,15 @@ main {
         z-index: 2;
         color: $whiteImageOverlayColor;
       }
+      .back {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: 30px;
+        display: none;
+        opacity: 0;
+        z-index: 4;
+      }
     }
     .project__content {
       display: none;
@@ -109,6 +121,7 @@ main {
     }
     &.main-project {
       overflow-y: scroll;
+      z-index: 3;
       // top: 0;
       // bottom: 0;
     }
