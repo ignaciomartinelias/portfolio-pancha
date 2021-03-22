@@ -71,7 +71,7 @@ main {
         main .project .project__cover .position.right {
           left: 75%; }
       main .project .project__cover .project__title {
-        font-size: 72px;
+        font-size: 64px;
         z-index: 2;
         letter-spacing: 3px;
         color: white; }
